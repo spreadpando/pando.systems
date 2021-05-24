@@ -23,7 +23,7 @@ const Nav: React.FC = () => {
   return (
     <NavContainer>
       <Link href='/'>
-          <Brand>aphyyd</Brand>
+          <Brand>pando.systems</Brand>
       </Link>
       <ul>
         <MenuItem>
