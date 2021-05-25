@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useContext, useRef } from 'react'
+import React, {
+	useState,
+	useEffect,
+	useContext,
+	useRef,
+	Dispatch,
+	SetStateAction
+} from 'react'
 import TrackContext from '../../contexts/track'
 import TrackInfo from './trackInfo'
 import styled from '@emotion/styled'
@@ -35,7 +42,16 @@ const ToggleOpen = styled('span')`
 	z-index: 4;
 `
 
-const Player: React.FC = () => {
+const Enter = styled('button')`
+	margin: 50vh 50vw;
+`
+
+interface IPlayerProps {
+	visible: boolean
+	setEntered: Dispatch<SetStateAction<boolean>>
+}
+
+const Player = ({ visible, setEntered }: IPlayerProps) => {
 	const scrubArea = useRef<HTMLDivElement>(null)
 	const tc = useContext(TrackContext)
 	const [isOpen, setIsOpen] = useState(false)
@@ -155,7 +171,7 @@ const Player: React.FC = () => {
 		}
 	}
 
-	return (
+	return visible ? (
 		<Container
 			ref={scrubArea}
 			onMouseUp={() => (scrubActive ? setScrubActive(false) : null)}
@@ -182,6 +198,15 @@ const Player: React.FC = () => {
 			<Timeline setScrubActive={setScrubActive} seek={seek} elapsed={elapsed} />
 			<Tracklist tracklist={tc.trackState.tracklist} />
 		</Container>
+	) : (
+		<Enter
+			onClick={() => {
+				togglePlay()
+				setEntered(true)
+			}}
+		>
+			enter
+		</Enter>
 	)
 }
 export default Player

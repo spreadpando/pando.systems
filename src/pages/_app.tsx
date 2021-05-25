@@ -1,8 +1,7 @@
-import { useReducer } from 'react'
+import { useReducer, useState } from 'react'
 import type { AppProps } from 'next/app'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-
 import {
 	TrackCotextProvider,
 	trackReducer,
@@ -15,7 +14,7 @@ const Player = dynamic(() => import('../components/player'), {
 })
 
 const App = ({ Component, pageProps }: AppProps) => {
-
+	const [entered, setEntered] = useState(false)
 
 	const [trackState, trackDispatch] = useReducer(
 		trackReducer,
@@ -37,8 +36,8 @@ const App = ({ Component, pageProps }: AppProps) => {
 				/>
 			</Head>
 			<TrackCotextProvider value={trackContextValues}>
-				<Component {...pageProps} />
-				<Player />
+				{entered ? <Component {...pageProps} /> : null}
+				<Player visible={entered} setEntered={setEntered} />
 			</TrackCotextProvider>
 			{globalStyles}
 		</>
