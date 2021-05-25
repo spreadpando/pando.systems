@@ -5,14 +5,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
   const {
     query: {  prefixes }
   } = req
-  console.log(prefixes)
-  const isStringArray = (tbd:any):tbd is string[] => {
-    if(Array.isArray(tbd)){
-      return true
-    }
 
-  }
-  if (isStringArray(prefixes)){
+  if (Array.isArray(prefixes)){
     const key = prefixes.join('/')
     // constants
     const bucket = process.env.SPACES_BUCKET

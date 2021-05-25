@@ -15,10 +15,10 @@ export interface ITrackActions {
 }
 
 export interface ITrackState {
-  tracklist: ITrack[]
+  tracklist: ITrack[],
+  current: ITrack,
   trackIndex: number
   isPlaying: boolean
-  src: string
 }
 
 const isTracklist = (tbd: any): tbd is ITrack[] => {
@@ -51,7 +51,7 @@ export const trackReducer = (
         return {
           ...state,
           trackIndex: payload,
-          src: `/api/tracks/${tracklist[payload].apiKey}`
+          current: tracklist[payload]
         }
       }
       return state
@@ -63,7 +63,7 @@ export const trackReducer = (
         return {
           ...state,
           tracklist: tracklist,
-          src: `/api/tracks/${payload[0].apiKey}`
+          current: payload[0]
         }
       } else if (payload[1] <= tracklist.length && payload[1] >= 0) {
         tracklist.splice(payload[1], 0, payload[0])
@@ -77,28 +77,27 @@ export const trackReducer = (
     case 'REMOVE':
       if (typeof (payload) === 'number'){
         if (payload < tracklist.length && payload >= 0) {
-        if (payload === trackIndex) {
-          tracklist.splice(payload, 1)
-          return {
-            ...state,
-            trackIndex: trackIndex - 1,
-            tracklist: tracklist,
-            src: `/api/tracks/${tracklist[trackIndex - 1].apiKey}`
-          }
-        } else {
-          tracklist.splice(payload, 1)
-          return {
-            ...state,
-            tracklist: tracklist
+          if (payload === trackIndex) {
+            tracklist.splice(payload, 1)
+            return {
+              ...state,
+              tracklist: tracklist,
+              current: tracklist[trackIndex]
+            }
+          } else {
+            tracklist.splice(payload, 1)
+            return {
+              ...state,
+              tracklist: tracklist
+            }
           }
         }
-      }
       }
       return state
 
     case 'REPLACE':
       if(isTracklist(payload)){
-      return { ...state, tracklist: payload }
+        return { ...state, tracklist: payload }
       } else{
         return state
       }
@@ -114,9 +113,9 @@ export interface ITrackContextProps {
 
 export const initialTrackState: ITrackState = {
   tracklist: [{ title: 'Untitled', artist: 'aphyyd', collection: 'hello', apiKey: 'tracks/aphyyd/hello/Untitled.wav' }],
+  current:{ title: 'Untitled', artist: 'aphyyd', collection: 'hello', apiKey: 'tracks/aphyyd/hello/Untitled.wav' },
   trackIndex: 0,
   isPlaying: false,
-  src: '/api/tracks/tracks/aphyyd/hello/Untitled.wav'
 }
 
 const TrackContext = createContext<ITrackContextProps>({
