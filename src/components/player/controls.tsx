@@ -14,6 +14,7 @@ const Panel = styled('div')`
 	z-index: 3;
 	font-size: 22px;
 `
+
 const SkipButton = styled('span')<{ enabled: boolean }>`
 	${({ enabled }) => (enabled ? 'color:#000;' : 'color: #ccc;')}
 `

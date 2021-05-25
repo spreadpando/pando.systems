@@ -26,16 +26,24 @@ export const globalStyles = (
 				font-family: Hack, monospace;
 				font-size: 12px;
 			}
+			#__next {
+				display: flex;
+				align-content: center;
+				justify-content: center;
+			}
 			ul,
 			ol {
 				padding: 0;
 			}
 			h1 {
 				font-size: 2em;
+				letter-spacing: 0.3em;
 			}
 			a {
 				color: inherit;
 				font-weight: 600;
+				font-style: italic;
+				text-decoration: none;
 			}
 			button,
 			input[type='submit'],

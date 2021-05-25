@@ -43,7 +43,8 @@ const ToggleOpen = styled('span')`
 `
 
 const Enter = styled('button')`
-	margin: 50vh 50vw;
+	justify-self: center;
+	align-self: center;
 `
 
 interface IPlayerProps {
@@ -105,6 +106,10 @@ const Player = ({ visible, setEntered }: IPlayerProps) => {
 			} else {
 				audio.currentTime = 0
 				setElapsed(0)
+				tc.trackDispatch({
+					type: 'PLAY',
+					payload: false
+				})
 			}
 		}
 
@@ -205,7 +210,7 @@ const Player = ({ visible, setEntered }: IPlayerProps) => {
 				setEntered(true)
 			}}
 		>
-			enter
+			hello world
 		</Enter>
 	)
 }
