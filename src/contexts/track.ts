@@ -9,17 +9,19 @@ export interface ITrack {
   apiKey: string
 }
 
-export interface ITrackActions {
-  type: 'PLAY' | 'SKIP' | 'QUEUE' | 'REMOVE' | 'REPLACE'
-  payload: boolean | number | [ITrack, number] | ITrack[]
-}
 
 export interface ITrackState {
-  tracklist: ITrack[],
-  current: ITrack,
+  tracklist: ITrack[]
+  current: ITrack
   trackIndex: number
-  isPlaying: boolean
+  isPlaying: boolean,
 }
+
+export interface ITrackActions {
+  type: 'PLAY' | 'SKIP' | 'QUEUE' | 'REMOVE' | 'REPLACE' 
+  payload: boolean | number | [ITrack, number] | ITrack[] 
+}
+
 
 const isTracklist = (tbd: any): tbd is ITrack[] => {
   if(Array.isArray(tbd)){
@@ -101,6 +103,7 @@ export const trackReducer = (
       } else{
         return state
       }
+
     default:
       return state
   }

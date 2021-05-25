@@ -43,7 +43,15 @@ const Player: React.FC = () => {
 	const [elapsed, setElapsed] = useState(0)
 	const [playhead, setPlayhead] = useState('first')
 	const [scrubActive, setScrubActive] = useState(false)
-	const [audio] = useState(new Audio(tc.trackState.src))
+	const [audio] = useState(
+		new Audio(`/api/tracks/${tc.trackState.current.apiKey}`)
+	)
+
+	// update audio.src
+	useEffect(() => {
+		audio.src = `/api/tracks/${tc.trackState.current.apiKey}`
+		tc.trackState.isPlaying ? audio.play() : audio.pause()
+	}, [tc.trackState.current])
 
 	// update playhead
 	useEffect(() => {
@@ -59,11 +67,6 @@ const Player: React.FC = () => {
 			setPlayhead('single')
 		}
 	}, [tc.trackState.trackIndex, tc.trackState.tracklist.length])
-
-	// update audio.src
-	useEffect(() => {
-		audio.src = `/api/tracks/${tc.trackState.current.apiKey}`
-	}, [tc.trackState.current])
 
 	useEffect(() => {
 		// update elapsed
@@ -81,7 +84,7 @@ const Player: React.FC = () => {
 		// handle audio ended
 		const handleEnd = (): void => {
 			if (playhead !== 'last' && playhead !== 'single') {
-				skip(true)
+				skip()
 				audio.play()
 			} else {
 				audio.currentTime = 0
@@ -105,7 +108,7 @@ const Player: React.FC = () => {
 		tc.trackDispatch({ type: 'PLAY', payload: !tc.trackState.isPlaying })
 	}
 
-	const skip = (shouldPlay: boolean): void => {
+	const skip = (): void => {
 		if (playhead !== 'last') {
 			tc.trackDispatch({
 				type: 'SKIP',
@@ -113,12 +116,10 @@ const Player: React.FC = () => {
 			})
 			setElapsed(0)
 			audio.currentTime = 0
-			shouldPlay ? audio.play() : null
 		}
 	}
 
 	const back = (): void => {
-		console.log(audio.currentTime)
 		if (audio.currentTime > 1) {
 			audio.currentTime = 0
 			setElapsed(0)
@@ -130,6 +131,9 @@ const Player: React.FC = () => {
 					type: 'SKIP',
 					payload: tc.trackState.trackIndex - 1
 				})
+			} else {
+				audio.currentTime = 0
+				setElapsed(0)
 			}
 		}
 	}

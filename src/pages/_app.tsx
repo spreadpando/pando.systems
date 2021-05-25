@@ -2,17 +2,21 @@ import { useReducer } from 'react'
 import type { AppProps } from 'next/app'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
+
 import {
 	TrackCotextProvider,
 	trackReducer,
 	initialTrackState
 } from '../contexts/track'
 import { globalStyles } from '../styles/'
-const Player = dynamic(async () => await import('../components/player'), {
+
+const Player = dynamic(() => import('../components/player'), {
 	ssr: false
 })
 
 const App = ({ Component, pageProps }: AppProps) => {
+
+
 	const [trackState, trackDispatch] = useReducer(
 		trackReducer,
 		initialTrackState
