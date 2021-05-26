@@ -6,25 +6,25 @@ import Nav from '../components/nav/'
 import { ITrack } from '../contexts/track'
 
 interface ICatalogProps {
-  tracklist: ITrack[]
+	tracklist: ITrack[]
 }
 
 const Catalog = ({ tracklist }: ICatalogProps) => {
-  return (
-    <>
-      <Nav/>
-      <Playlist tracklist={tracklist} />
-    </>
-  )
+	return (
+		<>
+			<Nav />
+			<Playlist tracklist={tracklist} />
+		</>
+	)
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const list = await s3ListObjects(S3, 'tracks/aphyyd/hello/')
-  return {
-    props: {
-      tracklist: list
-    }
-  }
+	const list = await s3ListObjects(S3, 'tracks/pando/meditations/')
+	return {
+		props: {
+			tracklist: list
+		}
+	}
 }
 
 export default Catalog

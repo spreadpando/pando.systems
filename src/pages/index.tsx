@@ -8,6 +8,7 @@ const Blurb = styled('div')`
 	width: calc(100% - 20vw);
 	height: 90%;
 	display: flex;
+	display: -webkit-flex;
 	justify-content: center;
 	align-content: center;
 	line-height: 1.5;

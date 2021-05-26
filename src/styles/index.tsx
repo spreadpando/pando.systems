@@ -30,6 +30,7 @@ export const globalStyles = (
 				display: flex;
 				align-content: center;
 				justify-content: center;
+				display: -webkit-flex;
 			}
 			ul,
 			ol {
