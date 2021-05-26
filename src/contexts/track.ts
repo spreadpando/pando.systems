@@ -3,127 +3,125 @@ import React from 'react'
 import { createContext } from 'react'
 
 export interface ITrack {
-  title: string
-  artist: string
-  collection: string
-  apiKey: string
+	title: string
+	artist: string
+	collection: string
+	apiKey: string
 }
 
-
 export interface ITrackState {
-  tracklist: ITrack[]
-  current: ITrack
-  trackIndex: number
-  isPlaying: boolean,
+	tracklist: ITrack[]
+	current: ITrack
+	trackIndex: number
+	isPlaying: boolean
+	error?: string
 }
 
 export interface ITrackActions {
-  type: 'PLAY' | 'SKIP' | 'QUEUE' | 'REMOVE' | 'REPLACE' 
-  payload: boolean | number | [ITrack, number] | ITrack[] 
+	type: 'PLAY' | 'SKIP' | 'QUEUE' | 'REMOVE' | 'REPLACE'
+	payload: boolean | number | [ITrack, number] | ITrack[]
 }
-
 
 const isTracklist = (tbd: any): tbd is ITrack[] => {
-  if(Array.isArray(tbd)){
-    if(tbd[1] && typeof(tbd[1]) != 'number'){
-      return true
-    }
-  }
+	if (Array.isArray(tbd)) {
+		if (tbd[1] && typeof tbd[1] != 'number') {
+			return true
+		}
+	}
 }
 
-
 export const trackReducer = (
-  state: ITrackState,
-  action: ITrackActions
+	state: ITrackState,
+	action: ITrackActions
 ): ITrackState => {
-  const payload = action.payload
-  const trackIndex = state.trackIndex
-  const tracklist = [...state.tracklist]
-  switch (action.type) {
-    case 'PLAY':
-      if (typeof (payload) === 'boolean') {
-        return { ...state, isPlaying: payload }
-      }
-      return state
+	const payload = action.payload
+	const tracklist = [...state.tracklist]
+	switch (action.type) {
+		case 'PLAY':
+			if (typeof payload === 'boolean') {
+				return { ...state, isPlaying: payload }
+			}
+			return state
 
-    case 'SKIP':
-      if (typeof (payload) === 'number' && 
-        payload < tracklist.length && 
-        payload >= 0) {
-        return {
-          ...state,
-          trackIndex: payload,
-          current: tracklist[payload]
-        }
-      }
-      return state
+		case 'SKIP':
+			if (
+				typeof payload === 'number' &&
+				payload < tracklist.length &&
+				payload >= 0
+			) {
+				return {
+					...state,
+					trackIndex: payload,
+					current: tracklist[payload]
+				}
+			}
+			return state
 
-    case 'QUEUE':
-      // payload[0] = track; payload[1] = index
-      if (payload[1] === trackIndex) {
-        tracklist.splice(payload[1], 0, payload[0])
-        return {
-          ...state,
-          tracklist: tracklist,
-          current: payload[0]
-        }
-      } else if (payload[1] <= tracklist.length && payload[1] >= 0) {
-        tracklist.splice(payload[1], 0, payload[0])
-        return {
-          ...state,
-          tracklist: tracklist
-        }
-      }
-      return state
+		case 'QUEUE':
+			// payload[0] = track; payload[1] = index
+			if (!tracklist.includes(payload[0])) {
+				tracklist.splice(payload[1], 0, payload[0])
+				return {
+					...state,
+					tracklist: tracklist
+				}
+			}
+			return state
 
-    case 'REMOVE':
-      if (typeof (payload) === 'number'){
-        if (payload < tracklist.length && payload >= 0) {
-          if (payload === trackIndex) {
-            tracklist.splice(payload, 1)
-            return {
-              ...state,
-              tracklist: tracklist,
-              current: tracklist[trackIndex]
-            }
-          } else {
-            tracklist.splice(payload, 1)
-            return {
-              ...state,
-              tracklist: tracklist
-            }
-          }
-        }
-      }
-      return state
+		case 'REMOVE':
+			if (
+				typeof payload === 'number' &&
+				tracklist.length > 0 &&
+				payload < tracklist.length
+			) {
+				tracklist.splice(payload, 1)
+				return {
+					...state,
+					tracklist: tracklist
+				}
+			}
 
-    case 'REPLACE':
-      if(isTracklist(payload)){
-        return { ...state, tracklist: payload }
-      } else{
-        return state
-      }
+			return state
 
-    default:
-      return state
-  }
+		case 'REPLACE':
+			if (isTracklist(payload)) {
+				return { ...state, tracklist: payload }
+			} else {
+				return state
+			}
+
+		default:
+			return state
+	}
 }
 
 export interface ITrackContextProps {
-  trackState: ITrackState
-  trackDispatch: React.Dispatch<ITrackActions>
+	trackState: ITrackState
+	trackDispatch: React.Dispatch<ITrackActions>
 }
 
 export const initialTrackState: ITrackState = {
-  tracklist: [{ title: 'Untitled', artist: 'aphyyd', collection: 'hello', apiKey: 'tracks/aphyyd/hello/Untitled.wav' }],
-  current:{ title: 'Untitled', artist: 'aphyyd', collection: 'hello', apiKey: 'tracks/aphyyd/hello/Untitled.wav' },
-  trackIndex: 0,
-  isPlaying: false,
+	tracklist: [
+		{
+			title: 'Untitled',
+			artist: 'aphyyd',
+			collection: 'hello',
+			apiKey: 'tracks/aphyyd/hello/Untitled.wav'
+		}
+	],
+	current: {
+		title: 'Untitled',
+		artist: 'aphyyd',
+		collection: 'hello',
+		apiKey: 'tracks/aphyyd/hello/Untitled.wav'
+	},
+	trackIndex: 0,
+	isPlaying: false
 }
 
 const TrackContext = createContext<ITrackContextProps>({
-  trackState: initialTrackState,
-  trackDispatch: () => {}
+	trackState: initialTrackState,
+	trackDispatch: () => {}
 })
 
 export const TrackContextConsumer = TrackContext.Consumer

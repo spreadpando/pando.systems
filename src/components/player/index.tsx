@@ -30,7 +30,7 @@ const Container = styled('div')<{ isOpen: boolean; playlistLength: number }>`
 	border-color: #000;
 	box-shadow: 2px 0px 25px 5px #ccc;
 	${({ isOpen, playlistLength }) =>
-		isOpen ? `height: calc(65px + 40px * ${playlistLength});` : 'height: 78px;'}
+		isOpen ? `height: calc(75px + 40px * ${playlistLength});` : 'height: 75px;'}
 `
 
 const ToggleOpen = styled('span')`
@@ -61,13 +61,15 @@ const Player = ({ visible, setEntered }: IPlayerProps) => {
 	const [playhead, setPlayhead] = useState('first')
 	const [scrubActive, setScrubActive] = useState(false)
 	const [audio] = useState(
-		new Audio(`/api/tracks/${tc.trackState.current.apiKey}`)
+		new Audio(`/api/tracks/${tc.trackState.current?.apiKey}`)
 	)
 
 	// update audio.src
 	useEffect(() => {
-		audio.src = `/api/tracks/${tc.trackState.current.apiKey}`
-		tc.trackState.isPlaying ? audio.play() : audio.pause()
+		if (tc.trackState.current) {
+			audio.src = `/api/tracks/${tc.trackState.current.apiKey}`
+			tc.trackState.isPlaying ? audio.play() : audio.pause()
+		}
 	}, [tc.trackState.current])
 
 	// update playhead
@@ -85,11 +87,12 @@ const Player = ({ visible, setEntered }: IPlayerProps) => {
 		}
 	}, [tc.trackState.trackIndex, tc.trackState.tracklist.length])
 
+	// add event listeners
 	useEffect(() => {
 		// update elapsed
 		const updateElapsed = (): void => {
 			const currentTime = audio.currentTime
-			const percentage = Math.round((currentTime / duration) * 100.0)
+			const percentage = Math.round((currentTime / duration) * 100.0 * 10) / 10
 			setElapsed(percentage)
 		}
 

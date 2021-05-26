@@ -30,10 +30,14 @@ interface ITrackProps {
 const Track: React.FC<ITrackProps> = ({ track }: ITrackProps) => {
 	const tc = useContext(TrackContext)
 
-	const handleSelect = (track): void => {
+	const play = (track): void => {
 		tc.trackDispatch({
 			type: 'QUEUE',
-			payload: [track, tc.trackState.trackIndex]
+			payload: [track, tc.trackState.trackIndex + 1]
+		})
+		tc.trackDispatch({
+			type: 'SKIP',
+			payload: tc.trackState.trackIndex + 1
 		})
 		tc.trackDispatch({ type: 'PLAY', payload: true })
 	}
@@ -50,7 +54,7 @@ const Track: React.FC<ITrackProps> = ({ track }: ITrackProps) => {
 			<span>{track.title}</span>
 			<span>{track.collection}</span>
 			<span>{track.artist}</span>
-			<Btn onClick={() => handleSelect(track)} title="play">
+			<Btn onClick={() => play(track)} title="play">
 				<IoPlayCircleOutline />
 			</Btn>
 			<Btn onClick={() => queue(track)} title="queue">
