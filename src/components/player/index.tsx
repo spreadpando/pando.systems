@@ -43,8 +43,10 @@ const ToggleOpen = styled('span')`
 `
 
 const Enter = styled('button')`
+	position: relative;
 	justify-self: center;
 	align-self: center;
+	z-index: 2;
 `
 
 interface IPlayerProps {

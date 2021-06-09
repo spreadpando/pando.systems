@@ -12,6 +12,7 @@ import { globalStyles } from '../styles/'
 const Player = dynamic(() => import('../components/player'), {
 	ssr: false
 })
+const Scene = dynamic(() => import('../components/dice/scene'), { ssr: false })
 
 const App = ({ Component, pageProps }: AppProps) => {
 	const [entered, setEntered] = useState(false)
@@ -37,6 +38,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 			</Head>
 			<TrackCotextProvider value={trackContextValues}>
 				{entered ? <Component {...pageProps} /> : null}
+				<Scene/>
 				<Player visible={entered} setEntered={setEntered} />
 			</TrackCotextProvider>
 			{globalStyles}

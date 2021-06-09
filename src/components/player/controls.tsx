@@ -35,7 +35,7 @@ interface IControlsProps {
 	playhead: string
 }
 
-const Controls: React.FC<IControlsProps> = ({
+const Controls = ({
 	back,
 	skip,
 	togglePlay,

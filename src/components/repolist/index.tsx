@@ -17,7 +17,7 @@ export interface IRepoListProps {
 	repos: []
 }
 
-const Repolist: React.FC<IRepoListProps> = ({ repos }: IRepoListProps) => {
+const Repolist = ({ repos }: IRepoListProps) => {
 	return (
 		<ReposContainer>
 			{repos.map((repo, i) => (

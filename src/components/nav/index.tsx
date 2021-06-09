@@ -6,7 +6,7 @@ const NavContainer = styled('div')`
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 1;
+	z-index: 2;
 `
 
 const MenuItem = styled('li')`
@@ -19,7 +19,7 @@ const Brand = styled('h1')`
 	padding: 15px 0px 0px 10px;
 `
 
-const Nav: React.FC = () => {
+const Nav = () => {
 	return (
 		<NavContainer>
 			<Link href="/">
