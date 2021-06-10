@@ -103,17 +103,17 @@ export interface ITrackContextProps {
 export const initialTrackState: ITrackState = {
 	tracklist: [
 		{
-			title: 'Untitled',
-			artist: 'aphyyd',
+			title: 'welcome',
+			artist: 'pando',
 			collection: 'hello',
-			apiKey: 'tracks/aphyyd/hello/Untitled.wav'
+			apiKey: 'tracks/pando/hello/welcome.wav'
 		}
 	],
 	current: {
-		title: 'Untitled',
-		artist: 'aphyyd',
+		title: 'welcome',
+		artist: 'pando',
 		collection: 'hello',
-		apiKey: 'tracks/aphyyd/hello/Untitled.wav'
+		apiKey: 'tracks/pando/hello/welcome.wav'
 	},
 	trackIndex: 0,
 	isPlaying: false
