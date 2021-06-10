@@ -13,6 +13,16 @@ export const globalStyles = (
 				user-select: none;
 				box-sizing: border-box;
 			}
+			input,
+			textarea,
+			input:before,
+			input:after {
+				-webkit-user-select: initial;
+				-khtml-user-select: initial;
+				-moz-user-select: initial;
+				-ms-user-select: initial;
+				user-select: initial;
+			}
 			html,
 			body,
 			#__next {

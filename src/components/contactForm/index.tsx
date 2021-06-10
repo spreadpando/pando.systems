@@ -23,7 +23,11 @@ const Container = styled('div')`
 		position: relative;
 		width: 100%;
 	}
-	input {
+
+	input,
+	select {
+		font-size: 16px;
+		font-color: #000;
 		background-color: transparent;
 		width: 100%;
 		margin: 1em 0;
@@ -34,13 +38,17 @@ const Container = styled('div')`
 		}
 	}
 	input[type='submit'] {
+		font-size: 16px;
+		font-color: #000;
 		width: 33%;
 		align-self: center;
 		margin: 2em;
 		border-width: 2px;
 	}
 	textarea {
+		font-size: 16px;
 		display: block;
+		font-color: #000;
 		width: 100%;
 		border-width: 2px;
 		border-color: #000;
