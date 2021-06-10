@@ -5,7 +5,6 @@ import styled from '@emotion/styled'
 const FlexContainer = styled('div')`
 	position: absolute;
 	display: flex;
-	z-index: 0;
 	top: 0;
 	left: 0;
 	width: 100%;

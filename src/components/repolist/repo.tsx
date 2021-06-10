@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 const Row = styled('div')`
 	width: 100%;
 	display: grid;
-	grid-template-columns: 25% 15% 45% 15%;
+	grid-template-columns: 30% 15% 45% 10%;
 	text-align: center;
 	hr {
 		margin: 0;

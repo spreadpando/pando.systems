@@ -6,7 +6,6 @@ const PlaylistFrame = styled('div')`
 	position: absolute;
 	top: 100px;
 	padding: 16px;
-	z-index: 1;
 	height: fit-content;
 	max-height: 75vh;
 	width: fill-available;
