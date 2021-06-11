@@ -71,9 +71,9 @@ const DragToReorderList = ({ tracklist }: ITracklistProps) => {
 				{list.map((track, index) => {
 					return (
 						<li
-							onTouchMove={e => handleDragStart(e, index)}
+							onDragStart={e => handleDragStart(e, index)}
 							onDragOver={e => e.preventDefault()}
-							onTouchStart={e => handleDragEnter(e, index)}
+							onDragEnter={e => handleDragEnter(e, index)}
 							key={index}
 							draggable
 						>

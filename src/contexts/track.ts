@@ -35,7 +35,9 @@ export const trackReducer = (
 	action: ITrackActions
 ): ITrackState => {
 	const payload = action.payload
-	const tracklist = [...state.tracklist]
+	const tracklist = state.tracklist
+	const trackIndex = state.trackIndex
+	const current = state.current
 	switch (action.type) {
 		case 'PLAY':
 			if (typeof payload === 'boolean') {
@@ -72,9 +74,17 @@ export const trackReducer = (
 			if (
 				typeof payload === 'number' &&
 				tracklist.length > 0 &&
-				payload < tracklist.length
+				payload < tracklist.length &&
+				tracklist[payload] != current
 			) {
 				tracklist.splice(payload, 1)
+				if (payload < trackIndex) {
+					return {
+						...state,
+						trackIndex: trackIndex - 1,
+						tracklist: tracklist
+					}
+				}
 				return {
 					...state,
 					tracklist: tracklist

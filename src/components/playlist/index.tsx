@@ -9,9 +9,6 @@ const PlaylistFrame = styled('div')`
 	height: fit-content;
 	border-radius: 2px;
 	background-color: #fff;
-	::-webkit-scrollbar {
-		display: none;
-	}
 	hr {
 		margin: 0;
 	}

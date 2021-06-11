@@ -1,5 +1,11 @@
 import { Canvas } from '@react-three/fiber'
-import { Glitch, EffectComposer } from '@react-three/postprocessing'
+import {
+	Glitch,
+	EffectComposer,
+	GodRays,
+	Outline,
+	ShockWave
+} from '@react-three/postprocessing'
 import styled from '@emotion/styled'
 import Icosahedron from './icosahedron'
 
@@ -54,7 +60,7 @@ const Scene = () => {
 				/>
 				<Icosahedron position={[2, -2, 0]} rotation={[0.25, 0, 0.15]} key={5} />
 				<EffectComposer>
-					<Glitch delay={[3, 15]} />
+					<Glitch delay={[3, 16]} dtSize={0.01} />
 				</EffectComposer>
 			</Canvas>
 		</Container>

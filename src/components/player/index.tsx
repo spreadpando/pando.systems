@@ -43,11 +43,10 @@ const ToggleOpen = styled('span')`
 `
 
 const Enter = styled('button')`
-	position: relative;
+	position: absolute;
+	padding: auto auto;
 	width: 100%;
-	height: 13%;
-	justify-self: center;
-	align-self: center;
+	height: 100%;
 	z-index: 2;
 `
 
