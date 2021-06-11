@@ -54,7 +54,7 @@ const Scene = () => {
 				/>
 				<Icosahedron position={[2, -2, 0]} rotation={[0.25, 0, 0.15]} key={5} />
 				<EffectComposer>
-					<Glitch />
+					<Glitch delay={[3, 15]} />
 				</EffectComposer>
 			</Canvas>
 		</Container>
