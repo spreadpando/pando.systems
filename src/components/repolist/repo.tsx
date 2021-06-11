@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import { IRepository } from '.'
 
 const Row = styled('div')`
 	width: 100%;
@@ -16,16 +17,11 @@ const Row = styled('div')`
 	}
 `
 
-interface IRepoProps {
-	repo: {
-		name?: string
-		url?: string
-		description?: string
-		homepageUrl?: string
-	}
+export interface IRepoListProps {
+	repo: IRepository
 }
 
-const Repo = ({ repo }: IRepoProps) => {
+const Repo = ({ repo }: IRepoListProps) => {
 	return (
 		<Row>
 			<span style={{ textAlign: 'left' }}>{repo.name}</span>

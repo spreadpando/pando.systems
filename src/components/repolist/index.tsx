@@ -13,8 +13,14 @@ const ReposContainer = styled('div')`
 		margin: 0.5rem 0;
 	}
 `
+export interface IRepository {
+	name: string
+	url: string
+	description: string
+	homepageUrl: string
+}
 export interface IRepoListProps {
-	repos: []
+	repos: IRepository[]
 }
 
 const Repolist = ({ repos }: IRepoListProps) => {

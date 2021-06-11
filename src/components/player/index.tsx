@@ -45,7 +45,7 @@ const ToggleOpen = styled('span')`
 const Enter = styled('button')`
 	position: relative;
 	width: 100%;
-	height: 33%;
+	height: 13%;
 	justify-self: center;
 	align-self: center;
 	z-index: 2;

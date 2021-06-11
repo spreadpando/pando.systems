@@ -4,15 +4,15 @@ import styled from '@emotion/styled'
 
 const Blurb = styled('div')`
 	position: absolute;
-	width: calc(100% - 20vw);
 	height: 90%;
+	width: 100%
 	display: flex;
 	display: -webkit-flex;
 	justify-content: center;
 	align-content: center;
 	line-height: 1.5;
 	flex-wrap: wrap;
-	margin: 0 2rem;
+	margin: 0 15vw;
 	p {
 		position: relative;
 		width: 100%;

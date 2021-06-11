@@ -7,7 +7,7 @@ const ListItem = styled('div')`
 	position: relative;
 	z-index: 2;
 	display: grid;
-	grid-template-columns: 27% 27% 27% 10% 10% max-content;
+	grid-template-columns: 33% 33% 13% 10% 10% max-content;
 	padding: 0px 4%;
 	color: #000;
 	span {

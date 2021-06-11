@@ -3,13 +3,10 @@ import { ITrack } from '../../contexts/track'
 import Track from './track'
 
 const PlaylistFrame = styled('div')`
-	position: absolute;
-	top: 100px;
+	position: relative;
+	width: 100%;
 	padding: 16px;
 	height: fit-content;
-	max-height: 75vh;
-	width: fill-available;
-	overflow-y: scroll;
 	border-radius: 2px;
 	background-color: #fff;
 	::-webkit-scrollbar {

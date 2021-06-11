@@ -36,12 +36,13 @@ export const globalStyles = (
 				font-family: Hack, monospace;
 				font-size: 12px;
 			}
-			#__next {
-				display: flex;
-				align-content: center;
-				justify-content: center;
-				display: -webkit-flex;
-			}
+			// #__next {
+			// 	display: flex;
+			// 	flex-wrap: wrap;
+			// 	align-content: center;
+			// 	justify-content: center;
+			// 	display: -webkit-flex;
+			// }
 			ul,
 			ol {
 				padding: 0;
