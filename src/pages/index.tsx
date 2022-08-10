@@ -29,13 +29,10 @@ const Catalog = () => {
 			<Blurb>
 				<p>
 					This webapp is built with<strong> Next.js</strong> and
-					<strong> Typescript</strong>. There is a custom-built api made up of
-					serverless functions which fetch data from
-					<strong> Github&apos;s GraphQL API</strong> and
-					<strong> Digital Ocean&apos;s S3 API</strong> to display a list of{' '}
-					<Link href="/code">my code repositories</Link> and securely stream a
-					collection of <Link href="/music">my audio / visual work</Link>,
-					respectively.
+					<strong> Typescript</strong>. The api talks to 
+					<strong> Github&apos;s GraphQL api</strong> and
+					<strong> Digital Ocean&apos;s S3 api</strong> to list my{' '}
+					<Link href="/code">code repositories</Link> and to stream some <Link href="/music"> music</Link>.
 				</p>
 			</Blurb>
 		</>
