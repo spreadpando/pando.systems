@@ -4,6 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
+		"build:digitalocean": "npm install --legacy-peer-deps && npm run build && npm run start",
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start -H 0.0.0.0 -p ${PORT:-8080}"
