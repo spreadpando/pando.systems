@@ -36,11 +36,11 @@ const Nav = () => {
 						<a>music</a>
 					</Link>
 				</MenuItem>
-				<MenuItem>
+				{/* <MenuItem>
 					<Link href="/contact">
 						<a>contact</a>
 					</Link>
-				</MenuItem>
+				</MenuItem> */}
 			</ul>
 		</NavContainer>
 	)
